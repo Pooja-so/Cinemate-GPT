@@ -1,7 +1,8 @@
-import "./App.css";
+import React from "react";
+import Body from "./pages/Home/Body";
 
-function App() {
-  return <div className="text-3xl font-bold bg-amber-600">Namaste Duniya.</div>;
-}
+const App = () => {
+  return <Body />;
+};
 
 export default App;
