@@ -5,6 +5,10 @@
 ## Project Setup:
 1. Created React App using Vite
 2. Configured Tailwind CSS
+3. Header
+4. Basic Routing Setup
+5. Built Login and SignUp Forms
+6. Form Validation (Validating Input fields using Regex`)
 
 ## Features
 1. Landing Page
