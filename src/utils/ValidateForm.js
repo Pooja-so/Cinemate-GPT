@@ -1,9 +1,9 @@
 function validateEmailAndPassword(email, password) {
-  let errorMessage = { emailError: "", passwordError: "" };
+  let errorMessage = null;
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (!emailRegex.test(email)) {
-    errorMessage = { ...errorMessage, emailError: "Email is not valid" };
+    errorMessage = {emailError: "Email is not valid" };
   }
 
   /*A common regular expression (regex) for password validation in JavaScript to enforce 

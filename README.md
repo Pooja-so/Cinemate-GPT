@@ -9,6 +9,10 @@
 4. Basic Routing Setup
 5. Built Login and SignUp Forms
 6. Form Validation (Validating Input fields using Regex`)
+7. useRef hook
+8. Firebase setup
+9. Deploying app to production
+10. Implement User Authentication using Firebase
 
 ## Features
 1. Landing Page

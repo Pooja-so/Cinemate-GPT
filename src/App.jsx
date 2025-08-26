@@ -1,5 +1,6 @@
 import React from "react";
-import Body from "./pages/Home/Body";
+import Body from "./components/Body";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return <Body />;
