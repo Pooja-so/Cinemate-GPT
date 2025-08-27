@@ -1,9 +1,31 @@
 import React from "react";
-import Body from "./components/Body";
-import "react-toastify/dist/ReactToastify.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import appStore from "./store/appStore.js";
+import Browse from "./components/Browse.jsx";
+import Home from "./components/Home.jsx";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
-  return <Body />;
+  const appRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "/browse",
+      element: <Browse />,
+    },
+  ]);
+  return (
+    <div>
+      <Provider store={appStore}>
+        <RouterProvider router={appRouter} />
+      </Provider>
+      {/* Toast Container should be at root level */}
+      <ToastContainer position="bottom-center" autoClose={3000} theme="dark" />
+    </div>
+  );
 };
 
 export default App;

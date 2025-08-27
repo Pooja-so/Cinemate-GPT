@@ -3,15 +3,16 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../../utils/firebase";
-import Header from "../../components/Header";
+import { auth } from "../utils/firebase";
 import {
   validateEmailAndPassword,
   validateUsername,
-} from "../../utils/ValidateForm";
+} from "../utils/ValidateForm";
 import { toast } from "react-toastify";
+// import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  // const navigate = useNavigate();
   const [isSignedIn, setSignedIn] = useState(true); // toggle between Sign In / Sign Up
   const [errorMessage, setErrorMessage] = useState(null); // email/password errors
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(""); // username errors
@@ -20,7 +21,7 @@ const LoginForm = () => {
   const passwordRef = useRef(null);
   const usernameRef = useRef(null);
 
-  function resetFormFields(){
+  function resetFormFields() {
     emailRef.current.value = "";
     passwordRef.current.value = "";
     usernameRef.current.value = "";
@@ -72,7 +73,7 @@ const LoginForm = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log("User created:", user);
-          resetFormFields();
+          toast.success("Signed Up successfully!");
         })
         .catch((error) => {
           console.log("Sign Up Error:", error.code, error.message);
@@ -84,9 +85,8 @@ const LoginForm = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log("User Signed in: ", user);
-          emailRef.current.value = "";
-          passwordRef.current.value = "";
+          toast.success("Signed In successfully!");
+          console.log("User Signed in.: ", user);
         })
         .catch((error) => {
           console.log("Sign Up Error:", error.code, error.message);
@@ -97,9 +97,15 @@ const LoginForm = () => {
 
   return (
     <div className="relative h-screen w-screen">
-      {/* Header */}
-      <Header />
-
+      {/* Logo */}
+      <div className="absolute z-10 py-4 w-full flex justify-center bg-black/10 backdrop-blur-xs bg-gradient-to-bl from-black rounded-b-4xl ">
+        <img
+          src="/NetflixLogo.png"
+          alt="Cinemate GPT Logo"
+          height={100}
+          width={100}
+        />
+      </div>
       {/* Background Image */}
       <div className="absolute inset-0 bg-[url('/BackgroundImage.jpg')] bg-cover bg-center "></div>
 

@@ -12,7 +12,8 @@
 7. useRef hook
 8. Firebase setup
 9. Deploying app to production
-10. Implement User Authentication using Firebase
+10. Implemented User Authentication using Firebase
+11. Setup Redux Store
 
 ## Features
 1. Landing Page
