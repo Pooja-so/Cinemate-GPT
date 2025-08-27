@@ -3,14 +3,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import appStore from "./store/appStore.js";
 import Browse from "./components/Browse.jsx";
-import Home from "./components/Home.jsx";
+import LoginForm from "./components/LoginForm.jsx";
 import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const appRouter = createBrowserRouter([
     {
       path: "/",
-      element: <Home />,
+      element: <LoginForm/>,
     },
     {
       path: "/browse",

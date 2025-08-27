@@ -13,6 +13,7 @@
 8. Firebase setup
 9. Deploying app to production
 10. Implemented User Authentication using Firebase
+    - Authentication in Firebase: https://chatgpt.com/share/68af38ff-bce8-8004-99a9-6a25b6ee3a7e
 11. Setup Redux Store
 
 ## Features

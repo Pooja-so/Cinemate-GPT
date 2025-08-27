@@ -1,7 +1,11 @@
 import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { addUser } from "../store/userSlice";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import {
@@ -9,10 +13,10 @@ import {
   validateUsername,
 } from "../utils/ValidateForm";
 import { toast } from "react-toastify";
-// import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isSignedIn, setSignedIn] = useState(true); // toggle between Sign In / Sign Up
   const [errorMessage, setErrorMessage] = useState(null); // email/password errors
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(""); // username errors
@@ -22,9 +26,10 @@ const LoginForm = () => {
   const usernameRef = useRef(null);
 
   function resetFormFields() {
-    emailRef.current.value = "";
-    passwordRef.current.value = "";
-    usernameRef.current.value = "";
+    // Reset only when not null i.e. contains some value
+    if (emailRef.current) emailRef.current.value = "";
+    if (passwordRef.current) passwordRef.current.value = "";
+    if (usernameRef.current) usernameRef.current.value = "";
   }
 
   /* Toggle between Sign In and Sign Up form */
@@ -35,7 +40,7 @@ const LoginForm = () => {
   }
 
   /* Handle form submission (Sign In / Sign Up) */
-  function handleFormsubmit(e) {
+  const handleFormsubmit = async (e) => {
     e.preventDefault();
 
     const email = emailRef.current?.value;
@@ -66,34 +71,66 @@ const LoginForm = () => {
       return;
     }
 
-    // --- Firebase Authentication ---
     if (!isSignedIn) {
-      // Sign Up: Create user account
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log("User created:", user);
-          toast.success("Signed Up successfully!");
-        })
-        .catch((error) => {
-          console.log("Sign Up Error:", error.code, error.message);
-          toast.error("Email id already exist!");
-        });
+      // --- SIGN UP FLOW ---
+      try {
+        // Step 1: Create user account
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user; // This user only contains uid and email 
+
+        // Step 2: Update user profile with displayName (username)
+        await updateProfile(user, { displayName: username });
+        console.log("✅ Profile updated successfully.");
+
+        // Step 3: Get latest user info (from auth.currentUser ensures updated displayName)
+        const { uid, email: userEmail, displayName } = auth.currentUser; // fetching updated user info using auth.currentUser
+
+        // Step 4: Store user in Redux
+        dispatch(addUser({ uid, email: userEmail, displayName }));
+        console.log("✅ User created & stored:", auth.currentUser);
+
+        // Step 5: Navigate to browse page
+        navigate("/browse");
+
+        // Step 6: Show success toast
+        toast.success("Signed Up successfully!");
+      } catch (error) {
+        console.error("❌ Sign Up Error:", error.code, error.message);
+        toast.error("Email already exists or invalid input!");
+      }
     } else {
-      // Sign In logic here
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          toast.success("Signed In successfully!");
-          console.log("User Signed in.: ", user);
-        })
-        .catch((error) => {
-          console.log("Sign Up Error:", error.code, error.message);
-          toast.error("Username or Password is invalid");
-        });
+      // --- SIGN IN FLOW ---
+      try {
+        // Step 1: Sign in user
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
+
+        // Step 2: Get user info
+        const { uid, email: userEmail, displayName } = user;
+
+        // Step 3: Store in Redux
+        dispatch(addUser({ uid, email: userEmail, displayName }));
+        console.log("✅ User signed in:", user);
+
+        // Step 4: Navigate to browse page
+        navigate("/browse");
+
+        // Step 5: Show success toast
+        toast.success("Signed In successfully!");
+      } catch (error) {
+        console.error("❌ Sign In Error:", error.code, error.message);
+        toast.error("Invalid username or password");
+      }
     }
-  }
+  };
 
   return (
     <div className="relative h-screen w-screen">

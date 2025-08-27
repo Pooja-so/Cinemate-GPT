@@ -12,21 +12,20 @@ const Home = () => {
 
   useEffect(() => {
     // attach the listener
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
       console.log("🔥 onAuthStateChanged fired:");
       if (user) {
         const { uid, email, displayName } = user;
+        console.log("AUth User: ", uid, ", ", email, ", ", displayName);
         dispatch(addUser({ uid, email, displayName }));
+        console.log("Inside sign Up onAUthChanged User: ", user);
         navigate("/browse");
       } else {
         dispatch(removeUser());
         navigate("/");
       }
     });
-
-    // detach the listener when component unmounts
-    return () => unsubscribe();
-  }, [dispatch, navigate]);
+  }, []);
 
   useEffect(() => {
     console.log("Home mounted");

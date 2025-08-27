@@ -2,19 +2,38 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useSelector, useDispatch } from "react-redux";
+import { removeUser } from "../store/userSlice";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const [showUsername, setShowUsername] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  function handleSignOut() {
-    signOut(auth)
-      .then(() => {
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log("Sign Out Error:  ", error);
-      });
-  }
+  const username = useSelector((state) => state.user?.displayName);
+
+  const handleSignOut = async () => {
+   
+    try {
+      // Step 1: Attempt to sign out the user
+      await signOut(auth);
+      // Step 2: Clear user from Redux store
+      dispatch(removeUser());
+      // Step 3: Navigate to home page
+      navigate("/");
+      // Step 4: Show success message
+      console.log("✅ Signed out successfully.");
+      toast.success("You have been signed out successfully.");
+    } catch (error) {
+      // Step 5: Handle error if sign-out fails
+      console.error("❌ Sign Out Error:", error);
+      toast.error("Sign Out failed. Try again later.");
+
+      // Step 6: Optional - navigate to a fallback error page
+      navigate("/error"); // TODO: Build an error page
+    }
+  };
+
   return (
     <div className="w-5/6 mx-auto mt-4 px-5 py-2 bg-zinc-300 backdrop-blur-lg border border-white/10 shadow-lg rounded-2xl flex items-center justify-between">
       <img src="/NetflixLogo.png" alt="Netflix logo" className="h-6 w-auto" />
@@ -36,7 +55,7 @@ const Header = () => {
           />
           {showUsername && (
             <span className="absolute z-10 mt-1 bg-blue-400 px-4 py-0.5 rounded-4xl border border-blue-600 backdrop-blur-xl">
-              Pooja
+              {username}
             </span>
           )}
         </div>
