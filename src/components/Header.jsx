@@ -10,10 +10,9 @@ const Header = () => {
   const [showUsername, setShowUsername] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const username = useSelector((state) => state.user?.displayName);
+  const { user } = useSelector((state) => state.user);
 
   const handleSignOut = async () => {
-   
     try {
       // Step 1: Attempt to sign out the user
       await signOut(auth);
@@ -55,7 +54,7 @@ const Header = () => {
           />
           {showUsername && (
             <span className="absolute z-10 mt-1 bg-blue-400 px-4 py-0.5 rounded-4xl border border-blue-600 backdrop-blur-xl">
-              {username}
+              {user?.displayName}
             </span>
           )}
         </div>
