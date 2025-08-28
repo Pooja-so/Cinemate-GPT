@@ -5,7 +5,6 @@ const userSlice = createSlice({
   initialState: { user: null, ready: false },
   reducers: {
     addUser: (state, action) => {
-      console.log("User slice: ", action.payload);
       state.user = action.payload;
       state.ready = true;
     },

@@ -16,7 +16,8 @@
     - Authentication in Firebase: https://chatgpt.com/share/68af38ff-bce8-8004-99a9-6a25b6ee3a7e
 11. Setup Redux Store
 12. Setup Protected Route for Browse Page
-13. Fetch movies from TMDB API (Stable API - Don't change frequently)
+13. Register App on TMDB[The Movie Database] website (Stable API - Don't change frequently)
+14. Fetch Current Streaming movies using TMDB get API 
 
 ## Features
 1. Landing Page

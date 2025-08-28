@@ -34,7 +34,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-5/6 mx-auto mt-4 px-5 py-2 bg-zinc-300 backdrop-blur-lg border border-white/10 shadow-lg rounded-2xl flex items-center justify-between">
+    <div className="w-screen absolute px-5 py-2 bg-black/10 backdrop-blur-xs bg-gradient-to-br from-black flex items-center justify-between">
       <img src="/NetflixLogo.png" alt="Netflix logo" className="h-6 w-auto" />
 
       {/* Example right-side nav items */}
@@ -46,7 +46,7 @@ const Header = () => {
           <img
             src="/UserIcon.png"
             alt="User icon"
-            className="bg-white rounded-full cursor-pointer"
+            className="bg-white rounded-full cursor-pointer border"
             height={10}
             width={30}
             onMouseOver={() => setShowUsername(true)}
