@@ -19,11 +19,9 @@ const Home = () => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       console.log("🔥 onAuthStateChanged fired:");
       if (firebaseUser) {
-        console.log("Currently logged in...")
         const { uid, email, displayName } = firebaseUser;
         dispatch(addUser({ uid, email, displayName }));
       } else {
-        console.log("Logged out...")
         dispatch(removeUser());
       }
     });

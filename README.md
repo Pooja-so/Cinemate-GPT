@@ -18,6 +18,9 @@
 12. Setup Protected Route for Browse Page
 13. Register App on TMDB[The Movie Database] website (Stable API - Don't change frequently)
 14. Fetch Current Streaming movies using TMDB get API 
+15. Custom hooks for Fetching movie list and movie trailer
+16. Updated Redux Store: Created MovieSlice for storing movie related data
+17. Designed Browse Page Part 1: Video Container
 
 ## Features
 1. Landing Page

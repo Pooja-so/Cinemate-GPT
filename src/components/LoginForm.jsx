@@ -84,14 +84,12 @@ const LoginForm = () => {
 
         // Step 2: Update user profile with displayName (username)
         await updateProfile(user, { displayName: username });
-        console.log("✅ Profile updated successfully.");
 
         // Step 3: Get latest user info (from auth.currentUser ensures updated displayName)
         const { uid, email: userEmail, displayName } = auth.currentUser; // fetching updated user info using auth.currentUser
 
         // Step 4: Store user in Redux
         dispatch(addUser({ uid, email: userEmail, displayName }));
-        console.log("✅ User created & stored:", auth.currentUser);
 
         // Step 5: Navigate to browse page
         navigate("/browse");
@@ -99,7 +97,6 @@ const LoginForm = () => {
         // Step 6: Show success toast
         toast.success("Signed Up successfully!");
       } catch (error) {
-        console.error("❌ Sign Up Error:", error.code, error.message);
         toast.error("Email already exists or invalid input!");
       }
     } else {
@@ -118,7 +115,6 @@ const LoginForm = () => {
 
         // Step 3: Store in Redux
         dispatch(addUser({ uid, email: userEmail, displayName }));
-        console.log("✅ User signed in:", user);
 
         // Step 4: Navigate to browse page
         navigate("/browse");
@@ -126,7 +122,6 @@ const LoginForm = () => {
         // Step 5: Show success toast
         toast.success("Signed In successfully!");
       } catch (error) {
-        console.error("❌ Sign In Error:", error.code, error.message);
         toast.error("Invalid username or password");
       }
     }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addNowPlayingMovies } from "../store/movieSlice";
 import { API_OPTIONS } from "../utils/constants";
+import { toast } from "react-toastify";
 
 /**
  * Custom hook to fetch "Now Playing" movies from TMDB
@@ -13,12 +14,10 @@ import { API_OPTIONS } from "../utils/constants";
 const useFetchNowPlayingMovies = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchNowPlayingMovies = async () => {
       setIsLoading(true);
-      setError(null);
 
       try {
         const response = await fetch(
@@ -32,7 +31,8 @@ const useFetchNowPlayingMovies = () => {
         // dispatch results to Redux; ensure we pass an array (fallback to empty array)
         dispatch(addNowPlayingMovies(data.results || []));
       } catch (error) {
-        setError(error.message);
+        console.log("Error while fetching MovieList: ", error.message);
+        toast.error("Check your internet connection..");
       } finally {
         setIsLoading(false);
       }
@@ -41,7 +41,7 @@ const useFetchNowPlayingMovies = () => {
     fetchNowPlayingMovies();
   }, [dispatch]);
 
-  return { isLoading, error };
+  return { isLoading};
 };
 
 export default useFetchNowPlayingMovies;

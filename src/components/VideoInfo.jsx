@@ -22,43 +22,42 @@ const VideoInfo = ({ movieInfo }) => {
   });
 
   return (
-    <div className="absolute w-4/6 top-1/2 left-7 px-5 py-4 text-justify font-serif">
-      <h1 className="text-3xl font-bold">{title}</h1>
-
-      <p className="text-lg text-gray-300 font-normal tracking-wide py-3">
+    <div className="flex flex-col justify-center px-5 py-4 text-justify font-serif">
+      <h1 className="text-3xl font-bold text-red-600">{title}</h1>
+      <p className="text-lg text-gray-300 tracking-wide py-3">
         {overview}
       </p>
-      <div className="flex gap-6 text-xl">
+
+      <div className="flex gap-6">
         <button
-          className="bg-white px-5 py-1.5 flex gap-2  items-center rounded-sm cursor-pointer
-         active:bg-white/80 active:scale-95 transition-all duration-150"
+          className="bg-white w-1/4 px-5 py-1.5 flex gap-2 text-xl items-center rounded-sm cursor-pointer
+          hover:opacity-50 active:bg-white/80 active:scale-95 transition-all duration-150"
         >
           <Play size={18} fill="black" />
           Play
         </button>
-        <div>
+        <div className="relative w-3/4">
           {showMoreInfo && (
             <div
-              className="absolute z-6 bottom-10 left-1/4 p-2 text-lg tracking-normal rounded-lg
-           text-black bg-white/20 backdrop-blur-sm border-white/30 font-serif "
+              className="absolute top-10 w-7/8 z-10 p-4 rounded-lg text-left 
+              border border-red-400/30 bg-red-950/40 text-amber-200 tracking-wide"
             >
               <p>
-                <b>Release Date: </b> {formattedDate}
+                Release Date: {formattedDate}
               </p>
               <p>
-                <b>Language: </b>
-                {original_language === "en" ? "English" : original_language}
+                Language: {original_language === "en" ? "English" : original_language}
               </p>
               <p>
-                <b> Genres: </b> {genres}
+                Genres: {genres}
               </p>
               <p>
-                <b>Rating: </b> {vote_average.toFixed(1)} / 10
+                Rating: {vote_average.toFixed(1)} / 10
               </p>
             </div>
           )}
           <div
-            className="px-3 py-1.5 flex items-center gap-2  text-white rounded-sm cursor-pointer
+            className="w-3/6 px-3 py-1.5 text-xl flex items-center gap-2  text-white rounded-sm cursor-pointer
           bg-white/25 backdrop-blur-md hover:bg-white/40 transition-all duration-150"
             onMouseOver={() => setShowMoreInfo(true)}
             onMouseOut={() => setShowMoreInfo(false)}

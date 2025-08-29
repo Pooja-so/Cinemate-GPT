@@ -21,11 +21,9 @@ const Header = () => {
       // Step 3: Navigate to home page
       navigate("/");
       // Step 4: Show success message
-      console.log("✅ Signed out successfully.");
       toast.success("You have been signed out successfully.");
     } catch (error) {
       // Step 5: Handle error if sign-out fails
-      console.error("❌ Sign Out Error:", error);
       toast.error("Sign Out failed. Try again later.");
 
       // Step 6: Optional - navigate to a fallback error page
@@ -34,14 +32,14 @@ const Header = () => {
   };
 
   return (
-    <div className="w-screen absolute px-5 py-2 bg-black/10 backdrop-blur-xs bg-gradient-to-br from-black flex items-center justify-between">
-      <img src="/NetflixLogo.png" alt="Netflix logo" className="h-6 w-auto" />
+    <div className="w-screen fixed z-10 px-5 py-1 bg-white/95 flex items-center justify-between">
+      <div className="flex gap-3">
+        <img src="/logo.png" alt="Netflix logo" className="self-center h-10 w-10 border rounded-full p-1" />
+        <span className="font-bold text-red-600 text-2xl font-sans">Cinemate GPT</span>
+      </div>
 
       {/* Example right-side nav items */}
       <nav className="flex gap-6 items-center text-white text-sm font-medium ">
-        <a href="#browse" className="hover:text-red-500 transition">
-          Browse
-        </a>
         <div>
           <img
             src="/UserIcon.png"
