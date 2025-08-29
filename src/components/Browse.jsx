@@ -9,7 +9,7 @@ const Browse = () => {
   if (isLoading) return <p>Loading movies...</p>;
 
   return (
-     <div className=" w-screen h-screen"> 
+     <div className="h-screen overflow-y-auto scrollbar-hide"> 
         <Header />
         {/*  Two sections:
           1. MainContainer

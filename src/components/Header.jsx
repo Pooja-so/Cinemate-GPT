@@ -34,8 +34,14 @@ const Header = () => {
   return (
     <div className="w-screen fixed z-10 px-5 py-1 bg-white/95 flex items-center justify-between">
       <div className="flex gap-3">
-        <img src="/logo.png" alt="Netflix logo" className="self-center h-10 w-10 border rounded-full p-1" />
-        <span className="font-bold text-red-600 text-2xl font-sans">Cinemate GPT</span>
+        <img
+          src="/logo.png"
+          alt="Netflix logo"
+          className="self-center h-10 w-10 border rounded-full p-1"
+        />
+        <span className="font-bold text-red-600 text-2xl font-sans">
+          Cinemate GPT
+        </span>
       </div>
 
       {/* Example right-side nav items */}
@@ -51,7 +57,10 @@ const Header = () => {
             onMouseOut={() => setShowUsername(false)}
           />
           {showUsername && (
-            <span className="absolute z-10 mt-1 bg-blue-400 px-4 py-0.5 rounded-4xl border border-blue-600 backdrop-blur-xl">
+            <span
+              className="absolute z-10 mt-1 px-4 py-0.5 rounded-4xl text-lg font-serif tracking-wider
+              border border-blue-900/40 bg-blue-950/60 text-amber-300"
+            >
               {user?.displayName}
             </span>
           )}

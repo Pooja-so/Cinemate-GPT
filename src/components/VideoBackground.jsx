@@ -3,7 +3,7 @@ import useFetchMovieTrailer from "../hooks/useFetchMovieTrailer";
 
 const VideoBackground = ({ movieId }) => {
   const { isLoading } = useFetchMovieTrailer(movieId);
-  const movieTrailer = useSelector((state) => state.movie?.movieTrailer);
+  const movieTrailer = useSelector((state) => state.movies?.movieTrailer);
   if (!movieTrailer) return; // Early return, Intially movieTrailer will be null during fetching process
 
   const videoClipURL = `https://www.youtube.com/embed/${movieTrailer?.key}?si=cktsufjBvMCZG6wO&autoplay=1&mute=1`;

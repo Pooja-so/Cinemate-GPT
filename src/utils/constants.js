@@ -7,6 +7,8 @@ export const API_OPTIONS = {
   },
 };
 
+export const TMDB_IMAGE_URL = "https://image.tmdb.org/t/p/w500/"
+
 // Map genre IDs to names (you can expand this list)
 export const genreMap = {
   28: "Action",
