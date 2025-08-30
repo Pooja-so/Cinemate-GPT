@@ -22,6 +22,8 @@
 16. Custom hooks for Fetching movie list and movie trailer
 17. Updated Redux Store: Created MovieSlice for storing movie related data
 18. Designed Browse Page Part 1: Video Container
+19. Designed Browse Page Part 2: MovieList Container
+    - Refactored custom hook for fetching movie APIS (more modular, increase reusability.)
 
 ## Features
 1. Landing Page
