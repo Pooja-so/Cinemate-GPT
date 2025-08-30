@@ -2,9 +2,7 @@ import { useSelector } from "react-redux";
 import MovieList from "./MovieList";
 
 const MovieListContainer = () => {
-  const nowPlayingMovies = useSelector(
-    (state) => state.movies?.nowPlayingMovies
-  );
+  const movies = useSelector((state) => state.movies);
 
   return (
     /* 3 MovieList -
@@ -13,9 +11,10 @@ const MovieListContainer = () => {
     */
     <div className="bg-black">
       <div className="w-full h-full flex flex-col gap-3 py-5">
-        <MovieList movies={nowPlayingMovies} category={"Now Playing"} />
-        <MovieList movies={nowPlayingMovies} category={"Popular"} />
-        <MovieList movies={nowPlayingMovies} category={"Trending"} />
+        <MovieList movies={movies?.nowPlayingMovies} category={"Now Playing"} />
+        <MovieList movies={movies?.popularMovies} category={"Popular"} />
+        <MovieList movies={movies?.upcomingMovies} category={"Upcoming"} />
+        <MovieList movies={movies?.topRatedMovies} category={"Top Rated"} />
       </div>
     </div>
   );

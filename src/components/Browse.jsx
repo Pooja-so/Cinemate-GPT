@@ -1,17 +1,18 @@
-import useFetchNowPlayingMovies from "../hooks/useFetchNowPlayingMovies";
 import Header from "./Header";
 import VideoContainer from "./VideoContainer";
 import MovieListContainer from "./MovieListContainer";
+import useFetchAllMovies from "../hooks/useFetchAllMovies";
 
 const Browse = () => {
-  const { isLoading } = useFetchNowPlayingMovies();
+  const { isLoadingAny } = useFetchAllMovies();
+  if (isLoadingAny) return <p>Loading all movies..</p>;
 
-  if (isLoading) return <p>Loading movies...</p>;
+  //TODO: return isLoadingAny ? <Loader /> : <MoviesDashboard />;
 
   return (
-     <div className="h-screen overflow-y-auto scrollbar-hide"> 
-        <Header />
-        {/*  Two sections:
+    <div className="h-screen overflow-y-auto scrollbar-hide">
+      <Header />
+      {/*  Two sections:
           1. MainContainer
             - Video clip palying in the Background
             - Video info (title)
@@ -19,9 +20,9 @@ const Browse = () => {
             - Movie list * n
               -- movie card * n
       */}
-        <VideoContainer />
-        <MovieListContainer />
-      </div>
+      <VideoContainer />
+      <MovieListContainer />
+    </div>
   );
 };
 

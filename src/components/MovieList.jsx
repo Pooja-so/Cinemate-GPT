@@ -3,7 +3,7 @@ import MovieCard from "./MovieCard";
 
 const MovieList = ({ movies, category }) => {
   if (!movies) return; // movies will be null during initial rendering
-  console.log("Movie: ", movies[0]);
+  console.log("Movies: ", movies);
 
   return (
     movies && (
