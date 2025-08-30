@@ -24,6 +24,7 @@
 18. Designed Browse Page Part 1: Video Container
 19. Designed Browse Page Part 2: MovieList Container
     - Refactored custom hook for fetching movie APIS (more modular, increase reusability.)
+    - Found Image CDN URL for movie poster-path 
 
 ## Features
 1. Landing Page
